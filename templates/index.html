@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Breast Cancer Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+   
+    <style>
+        .hero-section {
+            position: relative;
+        }
+
+        .logout-form {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .logout-form button {
+            padding: 8px 14px;
+            border: none;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+
+    <div class="hero-section">
+
+        <!-- LOGOUT BUTTON -->
+        <form action="{{ url_for('logout') }}" method="get" class="logout-form">
+            <button type="submit">Logout</button>
+        </form>
+
+        <div class="overlay">
+
+            <h1>🩺 Breast Cancer Prediction</h1>
+
+            <p>
+                AI-powered machine learning system for early breast cancer
+                prediction using important diagnostic medical features.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    
+
+    <div class="main-container">
+
+        <div class="card">
+
+            <h2>📋 Patient Diagnostic Details</h2>
+
+            <form action="/predict" method="POST">
+
+                <div class="grid">
+
+                    <div class="input-group">
+                        <label>Mean Radius</label>
+                        <input type="number" step="any" name="mean radius" placeholder="Enter Mean Radius" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mean Texture</label>
+                        <input type="number" step="any" name="mean texture" placeholder="Enter Mean Texture" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mean Perimeter</label>
+                        <input type="number" step="any" name="mean perimeter" placeholder="Enter Mean Perimeter" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mean Area</label>
+                        <input type="number" step="any" name="mean area" placeholder="Enter Mean Area" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mean Smoothness</label>
+                        <input type="number" step="any" name="mean smoothness" placeholder="Enter Mean Smoothness" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Worst Radius</label>
+                        <input type="number" step="any" name="worst radius" placeholder="Enter Worst Radius" required>
+                    </div>
+
+                </div>
+
+                <button type="submit">🔍 Predict Cancer</button>
+
+            </form>
+
+            {% if prediction_text %}
+            <div class="result-box">
+
+                <h2>Prediction: {{ prediction_text }}</h2>
+
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: {{ confidence }}%;">
+                        {{ confidence }}%
+                    </div>
+                </div>
+
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
